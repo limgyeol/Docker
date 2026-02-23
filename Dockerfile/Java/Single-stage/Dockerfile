@@ -1,8 +1,6 @@
-FROM openjdk:17-jdk-alpine AS build
-
+FROM openjdk:17-jdk-alpine
 WORKDIR /app
-COPY --from=build /build/libs/*.jar /app/app.jar
+COPY build/libs/*.jar app.jar
 RUN apk upgrade --no-cache && apk add --no-cache curl
-EXPOSE 8080
-
-CMD ["java", "-jar", "/app/app.jar"]
+EXPOSE 80
+CMD ["java", "-jar", "app.jar"]
